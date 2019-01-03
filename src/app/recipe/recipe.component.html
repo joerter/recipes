@@ -1,23 +1,64 @@
 <form [formGroup]="recipeForm">
-  <mat-form-field>
-    <input matInput placeholder="Recipe Name" type="text" formControlName="name">
-  </mat-form-field>
+    <mat-form-field>
+        <input
+            matInput
+            placeholder="Recipe Name"
+            type="text"
+            formControlName="name"
+        />
+    </mat-form-field>
 
-  <div formArrayName="ingredients">
-    <div *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i">
-      <mat-form-field>
-        <input matInput placeholder="Name" type="text" formControlName="name">
-      </mat-form-field>
+    <h3>Ingredients:</h3>
 
-      <mat-form-field>
-        <input matInput placeholder="Amount" type="text" formControlName="amount">
-      </mat-form-field>
+    <div formArrayName="ingredients">
+        <mat-list>
+            <div
+                class="ingredient"
+                *ngFor="let ingredient of ingredients.controls; let i = index"
+                [formGroupName]="i"
+            >
+                <mat-list-item>
+                    <div class="ingredient-field">
+                        <mat-form-field>
+                            <input
+                                matInput
+                                placeholder="Name"
+                                type="text"
+                                formControlName="name"
+                            />
+                        </mat-form-field>
+                    </div>
 
-      <mat-form-field>
-        <input matInput placeholder="Unit" type="text" formControlName="unit">
-      </mat-form-field>
+                    <div class="ingredient-field">
+                        <mat-form-field>
+                            <input
+                                matInput
+                                placeholder="Amount"
+                                type="text"
+                                formControlName="amount"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="ingredient-field">
+                        <mat-form-field>
+                            <input
+                                matInput
+                                placeholder="Unit"
+                                type="text"
+                                formControlName="unit"
+                            />
+                        </mat-form-field>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-list>
     </div>
-  </div>
 
-  {{recipeForm.value | json}}
+    <button mat-raised-button color="primary" (click)="addIngredient()">
+        Add Ingredient
+    </button>
+
+    <div>{{ recipeForm.value | json }}</div>
 </form>
