@@ -1,0 +1,23 @@
+<form [formGroup]="recipeForm">
+  <mat-form-field>
+    <input matInput placeholder="Recipe Name" type="text" formControlName="name">
+  </mat-form-field>
+
+  <div formArrayName="ingredients">
+    <div *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i">
+      <mat-form-field>
+        <input matInput placeholder="Name" type="text" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Amount" type="text" formControlName="amount">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Unit" type="text" formControlName="unit">
+      </mat-form-field>
+    </div>
+  </div>
+
+  {{recipeForm.value | json}}
+</form>
